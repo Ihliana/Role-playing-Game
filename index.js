@@ -1,10 +1,40 @@
 
+function getDiceRollArray(diceCount){
+  
+    const newDiceRolls = []
+    for(let i = 0; i < diceCount; i++){
+         newDiceRolls.push(Math.floor(Math.random() * 6) + 1)
+    }
+
+    return newDiceRolls
+}
+
+/*
+Challenge 
+1. Create a function called getDiceHtml. 
+2. getDiceHtml should map over the array of dice rolls 
+   returned from getDiceRollArray to generate the html 
+   we need to render our dice with random values. This is 
+   the HTML: `<div class="dice">DICE VALUE HERE</div>`
+3. Think about the parameters and arguments!
+4. Down in renderCharacter(), set diceHtml equals to our 
+   new getDiceHtml function. Remember to give it the argument
+   it needs. 
+5. Delete any code we no longer need.
+**hint.md for help**
+*/
+
+function getDiceHtml(diceCount){
+    return getDiceRollArray(diceCount).map((num) => `<div class="dice">${num}</div>`).join("")
+}
+
+
 const hero = {
     elementId: "hero", 
     name: "Wizard", 
     avatar: "images/wizard.png", 
     health: 60,
-    diceRoll: [3,1,4], 
+ 
     diceCount: 3
 
 }
@@ -14,25 +44,15 @@ const monster = {
     name: "Orc", 
     avatar: 'images/orc.png', 
     health: 10,
-    diceRoll: [2],
+
     diceCount: 1
 }
 
 
-
-/*
-CHALLENGE
-1. Instead of the for loop, map over the diceRoll array
-and save the new array to diceHTML.
-2. Remember to deal with the commas between dice.
-3. What keyword should be used to declare diceHTML? 
-*/
-
-
 function renderCharacter(data){
-    const {elementId, name, avatar, health, diceRoll, diceCount} = data
+    const {elementId, name, avatar, health, diceCount} = data
 
-    let diceHtml = diceRoll.map((roll) => `<div class="dice">${roll}</div>`).join("")
+    const diceHtml = getDiceHtml(diceCount)
 
 
     return  document.getElementById(elementId).innerHTML = `
