@@ -1,28 +1,19 @@
 
 function getDiceRollArray(diceCount){
+
+    /* Challenge: 
+        1. Instead of the for loop, use an Array constructor to 
+        create a new array which is diceCount length.
+        2. Fill the new array with zeros as its initial state.
+        3. Map over the new array directly (no need to declare a 
+        new variable) and return a random number from 1-6 in 
+        each element.
+        4. Delete all unnecessary code.
+     */ 
   
-    const newDiceRolls = []
-    for(let i = 0; i < diceCount; i++){
-         newDiceRolls.push(Math.floor(Math.random() * 6) + 1)
-    }
-
-    return newDiceRolls
+    return new Array(diceCount).fill(0).map(() => Math.floor(Math.random() * 6) + 1)
+    
 }
-
-/*
-Challenge 
-1. Create a function called getDiceHtml. 
-2. getDiceHtml should map over the array of dice rolls 
-   returned from getDiceRollArray to generate the html 
-   we need to render our dice with random values. This is 
-   the HTML: `<div class="dice">DICE VALUE HERE</div>`
-3. Think about the parameters and arguments!
-4. Down in renderCharacter(), set diceHtml equals to our 
-   new getDiceHtml function. Remember to give it the argument
-   it needs. 
-5. Delete any code we no longer need.
-**hint.md for help**
-*/
 
 function getDiceHtml(diceCount){
     return getDiceRollArray(diceCount).map((num) => `<div class="dice">${num}</div>`).join("")
