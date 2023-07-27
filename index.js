@@ -1,16 +1,5 @@
 
-function getDiceRollArray(diceCount){
-
-    /* Challenge: 
-        1. Instead of the for loop, use an Array constructor to 
-        create a new array which is diceCount length.
-        2. Fill the new array with zeros as its initial state.
-        3. Map over the new array directly (no need to declare a 
-        new variable) and return a random number from 1-6 in 
-        each element.
-        4. Delete all unnecessary code.
-     */ 
-  
+function getDiceRollArray(diceCount){ 
     return new Array(diceCount).fill(0).map(() => Math.floor(Math.random() * 6) + 1)
     
 }
@@ -39,27 +28,58 @@ const monster = {
     diceCount: 1
 }
 
+/*
+Challenge 1a
+1. Create a new constructor function called Character which
+   takes our data as a paramenter.
+2. Set up "this" for each of the 5 properties in our objects
+   (eg: this.health = data.health).
+*/
 
-function renderCharacter(data){
-    const {elementId, name, avatar, health, diceCount} = data
+/*
+Challenge 1b
+1. Create a method called getCharacterHtml that performs the 
+   same tasks as our current renderCharacter function.
+2. Create two new instances of Character. One for a hero, 
+   called "wizard", and one for a monster, called "orc". 
+   Render both of them on the page.
+3. Delete both the old renderCharacter function and the two 
+   lines of code at the bottom of the page which invoke that 
+   function.
+*/
 
-    const diceHtml = getDiceHtml(diceCount)
+function Character(data){
+    this.elementId = data.elementId
+    this.name = data.name 
+    this.avatar = data.avatar
+    this.health = data.health
+    this.diceCount = data.diceCount
+    this.renderCharacter = function(){
+        const {elementId, name, avatar, health, diceCount} = this;
+        const diceHtml = getDiceHtml(diceCount)
 
-
-    return  document.getElementById(elementId).innerHTML = `
-        <div class="character-card">
-            <h4 class="name"> ${name} </h4>
-            <img class="avatar" src=${avatar} />
-            <p class="health">health: <b> ${health} </b></p>
-            <div class="dice-container">
-                 ${diceHtml} 
-            </div>
-
-        </div>  
-    `
-
+        document.getElementById(this.elementId).innerHTML = `
+                    <div class="character-card">
+                        <h4 class="name"> ${name} </h4>
+                        <img class="avatar" src=${avatar} />
+                        <p class="health">health: <b> ${health} </b></p>
+                        <div class="dice-container">
+                            ${diceHtml} 
+                        </div>
+    
+                    </div>  
+                `
     }
     
-    renderCharacter(hero)
-    renderCharacter(monster)
+
+}
+
+
+const wizard = new Character(hero)
+const orc = new Character(monster)
+
+
+wizard.renderCharacter()
+orc.renderCharacter()
+
 
