@@ -4,10 +4,9 @@ function getDiceRollArray(diceCount){
     
 }
 
-function getDiceHtml(diceCount){
-    return getDiceRollArray(diceCount).map((num) => `<div class="dice">${num}</div>`).join("")
-}
-
+// CHALLENGE 
+// 1. Add this function as a method of our character constructor
+// 2. Make a small change to getCharacterHtml to make the app work again
 
 const hero = {
     elementId: "hero", 
@@ -30,18 +29,27 @@ const monster = {
 
 
 function Character(data){
-    /*CHALLENGE
-        -Use what you learned in the previous scrim to
-        remove the following 5 lines of code
-        */
+
 
     Object.assign(this, data)
 
+    this.getDiceHtml = function(diceCount){
+        return getDiceRollArray(diceCount).map((num) => `<div class="dice">${num}</div>`).join("")
+    }
+    
+
     this.getCharacterHtml = function(){
         const {elementId, name, avatar, health, diceCount} = this;
-        const diceHtml = getDiceHtml(diceCount)
+        const diceHtml = this.getDiceHtml(diceCount)
+    
+    /*
+    CHALLENGE
+    - instead of setting the innerHTML from right here in the contructor,
+    make it so that we just return that literal string of HTML
+    - This will break the app. Don't worry!
+    */
 
-        document.getElementById(elementId).innerHTML = `
+        return  `
                     <div class="character-card">
                         <h4 class="name"> ${name} </h4>
                         <img class="avatar" src=${avatar} />
@@ -54,14 +62,29 @@ function Character(data){
                 `
     }
     
-
 }
 
 
-const wizard = new Character(hero)
-wizard.getCharacterHtml()
+//CHALLENGE
+// - Make the wizard and orc render
+// - check hint.md if you need a hand 
 
+
+/* MINI CHALLENGE */
+// 1 Create one render() function that calls both wizard and orc 
+//  so we can control when they render. 
+// 2 call the function.
+
+
+const wizard = new Character(hero)
 const orc = new Character(monster)
-orc.getCharacterHtml()
+
+function render(){
+    document.getElementById(wizard.elementId).innerHTML = wizard.getCharacterHtml()
+    document.getElementById(orc.elementId).innerHTML = orc.getCharacterHtml()
+
+}
+
+render()
 
 
