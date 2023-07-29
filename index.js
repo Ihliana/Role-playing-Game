@@ -1,31 +1,25 @@
 
+import characterData from "./data.js"
+
+
 function getDiceRollArray(diceCount){ 
     return new Array(diceCount).fill(0).map(() => Math.floor(Math.random() * 6) + 1)
     
 }
+/*
+CHALLENGE
+-Create a new const called characterData and set it equals to an 
+object which holds both our hero and monster objects. 
 
-// CHALLENGE 
-// 1. Add this function as a method of our character constructor
-// 2. Make a small change to getCharacterHtml to make the app work again
+-Think about how we access the data from our new object
+when we set up new characters down at the very bottom of the app. 
+-See if you can work out what needs to change there to keep the 
+app working.
+*/
 
-const hero = {
-    elementId: "hero", 
-    name: "Wizard", 
-    avatar: "images/wizard.png", 
-    health: 60,
- 
-    diceCount: 3
 
-}
 
-const monster = {
-    elementId: "monster", 
-    name: "Orc", 
-    avatar: 'images/orc.png', 
-    health: 10,
 
-    diceCount: 1
-}
 
 
 function Character(data){
@@ -41,13 +35,7 @@ function Character(data){
     this.getCharacterHtml = function(){
         const {elementId, name, avatar, health, diceCount} = this;
         const diceHtml = this.getDiceHtml(diceCount)
-    
-    /*
-    CHALLENGE
-    - instead of setting the innerHTML from right here in the contructor,
-    make it so that we just return that literal string of HTML
-    - This will break the app. Don't worry!
-    */
+
 
         return  `
                     <div class="character-card">
@@ -65,20 +53,13 @@ function Character(data){
 }
 
 
-//CHALLENGE
-// - Make the wizard and orc render
-// - check hint.md if you need a hand 
+
+const wizard = new Character(characterData.hero)
+const orc = new Character(characterData.monster)
 
 
-/* MINI CHALLENGE */
-// 1 Create one render() function that calls both wizard and orc 
-//  so we can control when they render. 
-// 2 call the function.
 
-
-const wizard = new Character(hero)
-const orc = new Character(monster)
-
+/*Does something here need to change?*/
 function render(){
     document.getElementById(wizard.elementId).innerHTML = wizard.getCharacterHtml()
     document.getElementById(orc.elementId).innerHTML = orc.getCharacterHtml()
