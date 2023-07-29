@@ -1,6 +1,6 @@
 const characterData = {
     hero : {
-        elementId: "hero", 
+
         name: "Wizard", 
         avatar: "images/wizard.png", 
         health: 60,
@@ -9,7 +9,7 @@ const characterData = {
     
     },
     monster : {
-        elementId: "monster", 
+
         name: "Orc", 
         avatar: 'images/orc.png', 
         health: 10,

@@ -1,31 +1,28 @@
 
 import characterData from "./data.js"
-import getDiceRollArray from './utils.js'
-
 import Character from './Character.js'
 
 /*
-Challenge
-1. Create a file called 'utils.js'.
-2. Cut and paste the getDiceRollArray() function into it.
-3. Decide if this should be a default or named export. Think
-   about this!!
-4. Import back it into index.js
+CHALLENGE:
+1 Set up a function called attack()
+2 Wire up the attack button so when pressed, the 
+function logs out 'attack button working!'
+3 Do this without declaring any new variables
+**hint.md for help!!**
 */
+
 
 /*
-Challenge
-1. Create a file called 'Character.js'
-2. Cut and paste the constructor function into it.
-3. Decide if this should be a default or named export. Think
-   about this!!
-4. Import it into index.js
-5. You will hit a problem! Solve the problem!
+CHALLENGE
+1. Make the attack button trigger a dice roll for both
+wizard and orc (which method on the constructor does that??)
+2. Make sure the new dice score shows in the app
+**hint.md for help!!**
 */
 
-
-
-
+function attack(){
+    render()
+}
 
 
 const wizard = new Character(characterData.hero)
@@ -33,10 +30,13 @@ const orc = new Character(characterData.monster)
 
 
 function render(){
-    document.getElementById(wizard.elementId).innerHTML = wizard.getCharacterHtml()
-    document.getElementById(orc.elementId).innerHTML = orc.getCharacterHtml()
-
+    document.getElementById("hero").innerHTML = wizard.getCharacterHtml()
+    document.getElementById("monster").innerHTML = orc.getCharacterHtml()
+    
 }
+
+document.getElementById("attack-button").addEventListener('click', attack)
+
 
 render()
 
