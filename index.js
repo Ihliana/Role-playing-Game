@@ -2,13 +2,6 @@
 import characterData from "./data.js"
 import Character from './Character.js'
 
-/*
-CHALLENGE
-1. Inside attack(), check if either character is dead.
-If they are, call a new function called endGame().
-2. Set up the new function endGame() and have it 
-log out "the game is over".
-*/
 
 function attack(){
     wizard.getDiceHtml()
@@ -26,9 +19,17 @@ function attack(){
 
 
 function endGame(){
-    let endMessage = wizard.health === 0 && orc.health === 0 ? "No victors - all creatures are dead" 
+    const endMessage = wizard.health === 0 && orc.health === 0 ? "No victors - all creatures are dead" 
                     : wizard.health > 0 ? "The Wizard Wins" 
                     : "The Orc is Victorious"
+
+    const endEmoji = wizard.health > 0 ? "🔮" : "☠️" 
+    document.body.innerHTML = ` 
+        <div class="end-game">
+             <h2>Game Over</h2> 
+             <h3>${endMessage}</h3>
+             <p class="end-emoji">${endEmoji}</p>
+        </div>`
 
 
 }
