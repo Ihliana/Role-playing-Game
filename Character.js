@@ -1,21 +1,28 @@
 import {getDiceRollArray, getDicePlaceholderHtml} from './utils.js'
 
-/*
-Challenge
-1. Add a new property called currentDiceScore to each character's 
- data and initialise it to an empty array.
-2. Rewrite the getDiceHtml method so it updates currentDiceScore 
- with the values returned by getDiceRollArray.
+
+/*CHALLENGE
+1. Ceate a new method inside Character called "takeDamage".
+2. For now, have the method log out the name of the damaged character
+and phrase "is damaged".
+3. In index.js, find the attack() function and call takeDamage
+for each character inside that function. 
 */
 
 /*
-Challenge
-1. In the getDiceHtml method, map over currentDiceScore 
-to return this string of html template for each element:
-<div class="dice">${num}</div>`. Save this new array
-to diceArray.
-2. Modify the attack() function in index.js to get our 
-app working again.
+CHALLENGE
+1. In the takeDamage method, use what you have just learned
+to reduce attackScoreArray to a single number.
+2. Store that number in a const called totalAttackScore
+3. Decrement the health score by totalAttackScore
+*/
+
+/*
+CHALLENGE
+1. Add code to takeDamage so that when he character reaches 
+zero heath, they stay at zero health and don't drop below 
+zero.
+** hint.md for help!!**
 */
 
 function Character(data){
@@ -30,13 +37,23 @@ function Character(data){
         this.diceArray = this.currentDiceScore.map((num) => `<div class="dice">${num}</div>`).join("")
     }
 
+
     this.diceArray = getDicePlaceholderHtml(this.diceCount)
+
+
+
+    this.takeDamage = function(currentDiceScore){
+        const totalAttackScore = currentDiceScore.reduce((acc, nmb) => acc + nmb, 0)
+        this.health -= totalAttackScore
+        
+        if (this.health <= 0){
+            this.health = 0
+        }
+    }
     
 
     this.getCharacterHtml = function(){
-        const {name, avatar, health, diceCount} = this;
- 
-
+        const {name, avatar, health} = this;
 
         return  `
                     <div class="character-card">
