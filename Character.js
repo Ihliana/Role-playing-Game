@@ -1,29 +1,14 @@
 import {getDiceRollArray, getDicePlaceholderHtml} from './utils.js'
 
-
-/*CHALLENGE
-1. Ceate a new method inside Character called "takeDamage".
-2. For now, have the method log out the name of the damaged character
-and phrase "is damaged".
-3. In index.js, find the attack() function and call takeDamage
-for each character inside that function. 
-*/
-
 /*
 CHALLENGE
-1. In the takeDamage method, use what you have just learned
-to reduce attackScoreArray to a single number.
-2. Store that number in a const called totalAttackScore
-3. Decrement the health score by totalAttackScore
+1. Add a line of code inside the body of the if statement
+in the takeDamage method which will give the character a 
+new boolean "dead" when health reaches zero. It can be initialised with "true".
+2. For now, log out that boolean when the character's 
+health reaches zero.
 */
-
-/*
-CHALLENGE
-1. Add code to takeDamage so that when he character reaches 
-zero heath, they stay at zero health and don't drop below 
-zero.
-** hint.md for help!!**
-*/
+  
 
 function Character(data){
 
@@ -48,6 +33,8 @@ function Character(data){
         
         if (this.health <= 0){
             this.health = 0
+            this.dead = true
+         
         }
     }
     

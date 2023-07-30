@@ -2,14 +2,12 @@
 import characterData from "./data.js"
 import Character from './Character.js'
 
-/*CHALLENGE
-1. Think what data we need to pass to our new
-takeDamage method.
-2. Add that data as an argument each time we call
-takeDamage below.
-3. In the takeDamage method, take in the data as a 
-parameter called 'attackScoreArray' and log it out.
-**hint.md for help!** 
+/*
+CHALLENGE
+1. Inside attack(), check if either character is dead.
+If they are, call a new function called endGame().
+2. Set up the new function endGame() and have it 
+log out "the game is over".
 */
 
 function attack(){
@@ -18,7 +16,21 @@ function attack(){
 
     wizard.takeDamage(orc.currentDiceScore)
     orc.takeDamage(wizard.currentDiceScore)
+
+    if(wizard.dead || orc.dead){
+        endGame()
+    } 
+
     render()
+}
+
+
+function endGame(){
+    let endMessage = wizard.health === 0 && orc.health === 0 ? "No victors - all creatures are dead" 
+                    : wizard.health > 0 ? "The Wizard Wins" 
+                    : "The Orc is Victorious"
+
+
 }
 
 
