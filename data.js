@@ -1,23 +1,32 @@
 const characterData = {
-    hero : {
-
-        name: "Wizard", 
-        avatar: "images/wizard.png", 
+    hero: {
+        name: "Wizard",
+        avatar: "images/wizard.png",
         health: 60,
-        currentDiceScore: [],
-        diceCount: 3
-    
+        diceCount: 3,
+        currentDiceScore: []
     },
-    monster : {
-
-        name: "Orc", 
-        avatar: 'images/orc.png', 
+    orc: {
+        name: "Orc",
+        avatar: "images/orc.png",
         health: 30,
-        currentDiceScore: [],
-        diceCount: 1
+        diceCount: 1,
+        currentDiceScore: []
+    },
+    demon: {
+        name: "Demon",
+        avatar: "images/demon.png",
+        health: 25,
+        diceCount: 2,
+        currentDiceScore: []
+    },
+    goblin: {
+        name: "Goblin",
+        avatar: "images/goblin.png",
+        health: 20,
+        diceCount: 3,
+        currentDiceScore: []
     }
-
 }
-
 
 export default characterData
