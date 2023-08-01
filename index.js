@@ -3,6 +3,7 @@ import characterData from "./data.js"
 import Character from './Character.js'
 
 let monstersArray = ["orc", "demon", "goblin"];
+let isWaiting = false
 
 
 function getNewMonster() {
@@ -11,44 +12,58 @@ function getNewMonster() {
 }
 
 
+
 /*
 Challenge
-1. Add a pause of 1 second between a monster dying and
-another monster taking it's place.
-2. Add a pause of 1.5 seconds between the last monster 
-or the wizard dying, and the endMessage being displayed.
+1. Disable the user's ability to attack when a monster dies.
+2. Reneable the user's ability to attack when a new monster
+loads.
+3. When the game is over, disable the user's ability to attack.
+**hint.md for help!!**
 */
 
 
 
 function attack(){
-    wizard.getDiceHtml()
-    monster.getDiceHtml()
+    if(!isWaiting){
 
-    wizard.takeDamage(monster.currentDiceScore)
-    monster.takeDamage(wizard.currentDiceScore)
-    render()
-
-    /*change the code below this line*/
-    if(wizard.dead){
-        endGame()
-    }
-     else if(monster.dead){
-        if(monstersArray.length > 0){
-            setTimeout(() => {
-                monster = getNewMonster()
-                render()
-            },1000)
-        } else {
+        wizard.getDiceHtml()
+        monster.getDiceHtml()
+    
+        wizard.takeDamage(monster.currentDiceScore)
+        monster.takeDamage(wizard.currentDiceScore)
+        render()
+    
+        /*change the code below this line*/
+        if(wizard.dead){
             endGame()
         }
-     }
+         else if(monster.dead){
+
+            isWaiting = true
+            
+            if(monstersArray.length > 0){
+                setTimeout(() => {
+                    monster = getNewMonster()
+                    render()
+
+                    isWaiting = false
+                },1000)
+            } else {
+                endGame()
+            }
+         }
+
+    }
 
 
 }
 
 
 function endGame(){
+
+    isWaiting = true
+
     const endMessage = wizard.health === 0 && monster.health === 0 ? "No victors - all creatures are dead" 
                     : wizard.health > 0 ? "The Wizard Wins" 
                     : "The Orc is Victorious"
